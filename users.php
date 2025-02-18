@@ -8,11 +8,7 @@ session_start();
 include 'header.php';
 include 'business_logic.php';
 
-// التحقق من تسجيل الدخول، إذا كانت الجلسة غير موجودة يتم إعادة التوجيه إلى صفحة تسجيل الدخول
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: index.php");
-//     exit();
-// }
+
 
 $users = get_all_users();
 ?>
