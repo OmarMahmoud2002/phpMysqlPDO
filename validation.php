@@ -3,19 +3,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </header>
 <?php
-// Database connection details
-$host = 'localhost';
-$username = 'admin';
-$password = '123';
-$database = 'cafe';
+function validate_input($data) {
+    return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+}
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8mb4", $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false
-    ]);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+function validate_email($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function validate_password($password, $confirm_password) {
+    return $password === $confirm_password;
 }
 ?>
