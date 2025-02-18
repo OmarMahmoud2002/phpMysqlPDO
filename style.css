@@ -47,7 +47,7 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 100%;
     margin: 100px auto;
     padding: 20px;
     background: white;
@@ -114,3 +114,4 @@ form input, form select {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
