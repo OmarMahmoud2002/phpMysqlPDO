@@ -3,6 +3,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </header>
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit();
+}
 include 'business_logic.php';
 $user_id = $_GET['id'];
 $user = get_user_by_id($user_id);

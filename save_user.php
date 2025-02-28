@@ -4,6 +4,10 @@
 </header>
 <?php
 session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit();
+}
 include 'header.php';
 include 'business_logic.php';
 
@@ -43,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
 
-        $profile_picture = 'Images/' . md5($email) . '.jpg'; // استخدام md5 لتوليد اسم فريد بناءً على البريد الإلكتروني
+        $profile_picture = 'Images/' . md5($email) . '.jpg'; 
         if (!move_uploaded_file($_FILES['profile_picture']['tmp_name'], $profile_picture)) {
             echo "error in upload photo";
             exit;

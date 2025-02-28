@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </header>
 <?php
+
 session_start();
 include 'config.php';
 
@@ -13,19 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = trim($_POST['password']);
 
     if (empty($email) || empty($password)) {
-        $error = "يرجى ملء جميع الحقول!";
+        $error = "plz fill all data";
     } else {
         $stmt = $pdo->prepare("SELECT * FROM user WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if ($user && $password === $user['password']) {
+        if ($user && $password === $user['password'] ) {
 
             $_SESSION['user'] = $user['email'];
-            header("Location: add_user.php"); // بعد تسجيل الدخول ينتقل إلى لوحة التحكم
+            header("Location: add_user.php"); 
             exit();
         } else {
-            $error = "البريد الإلكتروني أو كلمة المرور غير صحيحة!";
+            $error = "invalid email or password";
         }
     }
 }
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>Login</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f4f4f4; text-align: center; padding-top: 50px; }
         .login-container { width: 300px; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin: auto; }
@@ -48,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
 <div class="login-container">
-    <h2>تسجيل الدخول</h2>
+    <h2>Login Cafe</h2>
     <form method="POST">
-        <input type="email" name="email" required placeholder="البريد الإلكتروني">
-        <input type="password" name="password" required placeholder="كلمة المرور">
-        <button type="submit">تسجيل الدخول</button>
+        <input type="email" name="email" required placeholder="email">
+        <input type="password" name="password" required placeholder="password">
+        <button type="submit">Login</button>
     </form>
     <?php if (!empty($error)) { echo "<p class='error'>$error</p>"; } ?>
 </div>

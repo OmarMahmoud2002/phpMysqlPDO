@@ -27,14 +27,6 @@ function get_all_users() {
     return $stmt->fetchAll();
 }
 
-// function get_all_users() {
-//     global $pdo;
-//     $stmt = $pdo->prepare("SELECT u.id, u.name, u.email, u.room_id, u.ext, r.name as room_name, u.profile_picture FROM users u JOIN rooms r ON u.room_id = r.id");
-//     $stmt->execute();
-//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
-
-
 
 // Get User by ID
 function get_user_by_id($id) {
@@ -54,16 +46,13 @@ function delete_user($id) {
 // Update User
 function update_user($id, $name, $email, $room_id, $ext, $profile_picture = null) {
     global $pdo;
-    if ($profile_picture) {
-        $stmt = $pdo->prepare("UPDATE user SET name=?, email=?, room_id=?, ext=?, profile_picture=? WHERE id=?");
-        return $stmt->execute([$name, $email, $room_id, $ext, $profile_picture, $id]);
-    } else {
+ 
         $stmt = $pdo->prepare("UPDATE user SET name=?, email=?, room_id=?, ext=? WHERE id=?");
         return $stmt->execute([$name, $email, $room_id, $ext, $id]);
-    }
+    
 }
 
-// Validate User Credentials (Login)
+// Validate 
 function validate_user($email, $password) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM user WHERE email = ?");

@@ -5,6 +5,12 @@
 
 <?php
 session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit();
+}
+
 include 'header.php';
 include 'business_logic.php';
 
@@ -32,7 +38,7 @@ $users = get_all_users();
                 <td><?= $user['ext'] ?></td>
                 <td>
                     <?php
-                    $image_path = 'Images/' . md5($user['email']) . '.jpg'; // استخدم md5 للتأكد من اسم فريد
+                    $image_path = 'Images/' . md5($user['email']) . '.jpg'; 
                     if (file_exists($image_path)) {
                         echo "<img src='$image_path' class='profile-img' alt='Profile'>";
                     } else {
@@ -43,6 +49,7 @@ $users = get_all_users();
                 <td>
                     <a href="edit_user.php?id=<?= $user['id'] ?>">Edit</a> |
                     <a href="delete_user.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                    
                 </td>
             </tr>
         <?php endforeach; ?>

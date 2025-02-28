@@ -91,7 +91,6 @@
 </head>
 
 <body>
-
 <?php if (isset($_SESSION['user'])): ?>
     <nav class="navbar">
         <div class="logo">Cafeteria</div>
